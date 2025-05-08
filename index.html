@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dell - Para estudo</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="logo">
+            <img src="./imagem/logo.png" alt="Dell Logo">
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="notebooks.html">Notebooks</a>
+            <a href="desktops.html">Desktops</a>
+            <a href="monitores.html">Monitores</a>
+            <a href="acessórios.html">Acessórios</a>
+        </nav>
+        <div class="cart">
+            <a href="carrinho.html">
+               <img src="./imagem/carrinho-de-compras.png" alt="Carrinho de Compras" width="30" height="30">
+            </a>
+        </div>
+    </header>
+
+    <section class="banner">
+        <h1>Loja Oficial Dell Brasil</h1>
+        <p>Aproveite 12x sem juros e frete grátis em ofertas!</p>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slides">
+                    <div class="carousel-slide">
+                        <img src="./imagem/carrossel1.jpg" alt="Promoção notebook">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="./imagem/carrossel2.png" alt="Promoção notebook">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="./imagem/carrossel3.png" alt="Promoção notebook">
+                    </div>
+                </div>
+                <button class="carousel-prev">&lt;</button>
+                <button class="carousel-next">&gt;</button>
+                <div class="carousel-indicators">
+                    <span class="carousel-indicator active"></span>
+                    <span class="carousel-indicator"></span>
+                    <span class="carousel-indicator"></span>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="btn">Comprar Agora</a>
+    </section>
+
+    <section class="products">
+        <div class="product-card">
+            <img src="./imagem/notebook1.jpg" alt="Desktop Dell">    
+            <h3>Notebook Inspiron</h3>
+            <p>R$ 4.999,00</p>
+            <a href="#" class="btn">Ver Detalhes</a>
+        </div>
+        <div class="product-card">
+            <img src="./imagem/notebook2.webp" alt="Desktop Dell">
+            <h3>Desktop Vostro</h3>
+            <p>R$ 3.799,00</p>
+            <a href="#" class="btn">Ver Detalhes</a>
+        </div>
+        <div class="product-card">
+            <img src="./imagem/tela3.webp" alt="Monitor Dell">
+            <h3>Monitor UltraSharp</h3>
+            <p>R$ 2.199,00</p>
+            <a href="#" class="btn">Ver Detalhes</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Dell - Para estudos.</p>
+        <p><a href="#">Fale Conosco</a> | <a href="#">Suporte Técnico</a> | <a href="#">Política de Privacidade</a></p>
+        <p>Feito por Paulo Petinati</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelector('.carousel-slides');
+            const slideElements = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const prevBtn = document.querySelector('.carousel-prev');
+            const nextBtn = document.querySelector('.carousel-next');
+            let currentIndex = 0;
+            let intervalId;
+
+            function updateCarousel() {
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = (index + slideElements.length) % slideElements.length;
+                updateCarousel();
+            }
+
+            function startAutoPlay() {
+                intervalId = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, 5000);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(intervalId);
+            }
+
+            updateCarousel();
+            startAutoPlay();
+
+            prevBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                goToSlide(currentIndex - 1);
+                startAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                goToSlide(currentIndex + 1);
+                startAutoPlay();
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    stopAutoPlay();
+                    goToSlide(index);
+                    startAutoPlay();
+                });
+            });
+
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', stopAutoPlay);
+            carousel.addEventListener('mouseleave', startAutoPlay);
+        });
+    </script>
+</body>
+</html>
