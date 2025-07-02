@@ -164,7 +164,7 @@ button {
 .carousel-slide img {
     width: 100%;
     display: block;
-    max-height: 450px; /* Altura máxima para manter proporção */
+    max-height: 450px;
     object-fit: cover;
 }
 
